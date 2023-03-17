@@ -2,11 +2,15 @@ package com.n0rth.rest.service.impl;
 
 import com.n0rth.rest.dao.PersonRepository;
 import com.n0rth.rest.domain.Person;
+import com.n0rth.rest.exceptionhandling.exception.PersonNotFoundException;
 import com.n0rth.rest.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -30,13 +34,21 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getById(Long id) {
-        return repository.getReferenceById(id);
+        Optional<Person> person = repository.findById(id);
+
+        if (person.isEmpty()) throw new PersonNotFoundException("There is no person with " + id + " id");
+
+        return person.get();
     }
 
     @Override
-    public Person getByName(String name) {
-        return repository.findByName(name);
+    public int getAge(Long id) {
+        Person person = getById(id);
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(currentDate, person.getBirthDate());
+        return Math.abs(period.getYears());
     }
+
 
     @Override
     public List<Person> getAll() {

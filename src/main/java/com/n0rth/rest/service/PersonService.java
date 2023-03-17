@@ -12,7 +12,7 @@ public interface PersonService {
 
     Person getById(Long id);
 
-    Person getByName(String name);
+    int getAge(Long id);
 
     List<Person> getAll();
 }
