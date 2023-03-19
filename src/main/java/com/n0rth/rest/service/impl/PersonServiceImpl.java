@@ -23,8 +23,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void save(Person person) {
-        repository.save(person);
+    public Person save(Person person) {
+        return repository.save(person);
     }
 
     @Override
@@ -42,8 +42,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public int getAge(Long id) {
-        Person person = getById(id);
+    public int getAge(Person person) {
         LocalDate currentDate = LocalDate.now();
         Period period = Period.between(currentDate, person.getBirthDate());
         return Math.abs(period.getYears());

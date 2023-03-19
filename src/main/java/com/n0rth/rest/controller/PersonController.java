@@ -40,7 +40,7 @@ public class PersonController {
     @PostMapping
     public PersonDTO createPerson(@RequestBody PersonCreationDTO dto) {
         Person person = mapper.toPerson(dto);
-        service.save(person);
+        person = service.save(person);
 
         return mapper.toDto(person);
     }
@@ -51,7 +51,7 @@ public class PersonController {
         currentPerson.setName(person.getName());
         currentPerson.setSurname(person.getSurname());
         currentPerson.setBirthDate(person.getBirthDate());
-        service.save(currentPerson);
+        currentPerson = service.save(currentPerson);
         return mapper.toDto(currentPerson);
     }
 

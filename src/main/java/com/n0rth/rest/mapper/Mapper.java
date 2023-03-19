@@ -18,7 +18,7 @@ public class Mapper {
     }
 
     public PersonDTO toDto(Person person) {
-        int age = service.getAge(person.getId());
+        int age = service.getAge(person);
 
         return new PersonDTO(person.getName(), person.getSurname(), age);
     }
@@ -26,5 +26,9 @@ public class Mapper {
     public Person toPerson(PersonCreationDTO dto) {
 
         return new Person(0L, dto.getName(), dto.getSurname(), dto.getBirthDate());
+    }
+
+    public PersonCreationDTO toCreationDTO(Person person) {
+        return new PersonCreationDTO(person.getName(), person.getSurname(), person.getBirthDate());
     }
 }

@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface PersonService {
 
-    void save(Person person);
+    Person save(Person person);
 
     void delete(Long id);
 
     Person getById(Long id);
 
-    int getAge(Long id);
+    int getAge(Person person);
 
     List<Person> getAll();
 }
