@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'oscarfonts/h2'
+    container_name: 'java-h2'
+    environment:
+      - 'DATABASE_SERVER=jdbc:h2:mem:persondb'
+      - 'DATABASE_USER=n0rth'
+      - 'DATABASE_PASSWORD=password'
+
+  app:
+    build: ./
+    container_name: 'java-app'
+    ports:
+      - 8080:8080
+
